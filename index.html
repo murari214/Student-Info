@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Resource Planning | Centurion University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --accent-gold: #ff9900;
+            --success-green: #28a745;
+            --danger-red: #dc3545;
+            --surface: #ffffff;
+            --background: #f0f2f5;
+            --text-main: #1a1a1b;
+            --text-muted: #65676b;
+            --border-color: #e4e6eb;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+
+        body {
+            background-color: var(--background);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .erp-container {
+            display: flex;
+            width: 90%;
+            max-width: 1100px;
+            height: 650px;
+            background: var(--surface);
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* Left Side: Branding & Info */
+        .branding-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #001a33 100%);
+            color: white;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .branding-side h1 { font-size: 28px; font-weight: 800; border-left: 4px solid var(--accent-gold); padding-left: 15px; }
+        .branding-side span { color: var(--accent-gold); }
+
+        .notice-board {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* Right Side: Action Area */
+        .action-side {
+            flex: 1.2;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .view-header { margin-bottom: 30px; }
+        .view-header h2 { color: var(--primary-blue); font-size: 22px; }
+        .view-header p { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
+
+        /* Form Styling */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        
+        .input-wrapper { position: relative; }
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.2s;
+            background: #fafafa;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(0,51,102,0.1);
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-primary:hover { background: #002244; transform: translateY(-1px); }
+
+        /* Dashboard Styles */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .data-card {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .data-card .label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .data-card .value { font-size: 14px; font-weight: 600; color: var(--primary-blue); margin-top: 4px; }
+
+        /* Legal Footer */
+        .legal-footer {
+            margin-top: auto;
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .legal-links a { color: var(--primary-blue); text-decoration: none; margin: 0 5px; }
+
+        .hidden { display: none !important; }
+
+        /* Loading Spinner Animation */
+        .spinner {
+            width: 20px; height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            display: inline-block;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="erp-container">
+        <section class="branding-side">
+            <div>
+                <h1>CENTURION<br><span>UNIVERSITY</span></h1>
+                <p style="margin-top: 10px; font-weight: 300; opacity: 0.8;">Integrated Enterprise Systems</p>
+            </div>
+
+            <div class="notice-board">
+                <strong>System Notice:</strong><br>
+                Scheduled maintenance on Sunday, 02:00 AM IST. Please ensure all examination forms are submitted before the window closes.
+            </div>
+
+            <p style="font-size: 11px; opacity: 0.6;">© 2024 CUTM. All Rights Reserved. Authorized Access Only.</p>
+        </section>
+
+        <section class="action-side">
+            
+            <div id="login-view">
+                <div class="view-header">
+                    <h2>Student Authentication</h2>
+                    <p>Secure access to your academic records and ERP services.</p>
+                </div>
+
+                <form id="erp-login-form">
+                    <div class="form-group">
+                        <label>Institutional Identity (Regd. No)</label>
+                        <input type="text" id="regNo" placeholder="e.g. 241107140001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Security Credential</label>
+                        <input type="password" id="secret" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-primary" id="login-btn">
+                        Authenticate User
+                    </button>
+                </form>
+
+                <div id="login-error" style="color: var(--danger-red); font-size: 13px; margin-top: 15px; text-align: center; display: none;">
+                    Authentication failed. Check credentials and try again.
+                </div>
+            </div>
+
+            <div id="dash-view" class="hidden">
+                <div class="view-header">
+                    <h2 id="user-welcome">User: Raghav Kumar</h2>
+                    <p>Academic Profile Session 2024-28</p>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="data-card"><div class="label">Regd Number</div><div class="value" id="res-id">-</div></div>
+                    <div class="data-card"><div class="label">Department</div><div class="value" id="res-dept">-</div></div>
+                    <div class="data-card" style="grid-column: span 2;"><div class="label">Email Address</div><div class="value" id="res-mail">-</div></div>
+                    <div class="data-card"><div class="label">Attendance</div><div class="value" style="color: var(--success-green);">88.4%</div></div>
+                    <div class="data-card"><div class="label">Fee Status</div><div class="value">Paid</div></div>
+                </div>
+
+                <button onclick="location.reload()" class="btn-primary" style="background: #eee; color: #333; margin-top: 25px;">Secure Sign Out</button>
+            </div>
+
+            <footer class="legal-footer">
+                <p>IP Address logged for security audit: 192.168.1.1</p>
+                <div class="legal-links">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="#">IT Policy</a>
+                </div>
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('erp-login-form');
+        const loginBtn = document.getElementById('login-btn');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Add Loading State
+            loginBtn.innerHTML = '<span class="spinner"></span> Verifying...';
+            loginBtn.disabled = true;
+
+            // Simulate API Network Delay
+            setTimeout(() => {
+                const reg = document.getElementById('regNo').value;
+                const pass = document.getElementById('secret').value;
+
+                // In production, this would be a POST request to /api/auth
+                if(reg === "241107140001" && pass === "12345") {
+                    showDashboard({
+                        name: "Raghav Kumar",
+                        dept: "B.Tech Computer Science",
+                        id: reg,
+                        mail: "raghav.24@cutm.ac.in"
+                    });
+                } else {
+                    document.getElementById('login-error').style.display = 'block';
+                    loginBtn.innerHTML = 'Authenticate User';
+                    loginBtn.disabled = false;
+                }
+            }, 1200);
+        });
+
+        function showDashboard(data) {
+            document.getElementById('login-view').classList.add('hidden');
+            document.getElementById('dash-view').classList.remove('hidden');
+            
+            document.getElementById('user-welcome').innerText = data.name;
+            document.getElementById('res-id').innerText = data.id;
+            document.getElementById('res-dept').innerText = data.dept;
+            document.getElementById('res-mail').innerText = data.mail;
+        }
+    </script>
+</body>
+</html>
