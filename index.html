@@ -228,46 +228,82 @@
     </div>
 
     <script>
-        const loginForm = document.getElementById('erp-login-form');
-        const loginBtn = document.getElementById('login-btn');
+        <script>
+    // Comprehensive Institutional Directory
+    const directory = [
+        { id: "241107140001", key: "12345", name: "Raghav Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140001@centurionuniv.edu.in", tel: "+91 9162*******", pic: "image1.png" },
+        { id: "241107140002", key: "12345", name: "Vineet Raj", dept: "CSE", yr: "2nd Year", mail: "241107140002@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image2.png" },
+        { id: "241107140003", key: "12345", name: "Ayan Hussain", dept: "CSE", yr: "2nd Year", mail: "241107140003@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image3.png" },
+        { id: "241107140004", key: "12345", name: "Atiullah Alam", dept: "CSE", yr: "2nd Year", mail: "241107140004@centurionuniv.edu.in", tel: "+91 7482*******", pic: "image4.png" },
+        { id: "241107140005", key: "12345", name: "Ranjana Kumari", dept: "CSE", yr: "2nd Year", mail: "241107140005@centurionuniv.edu.in", tel: "+91 8322*******", pic: "image5.png" },
+        { id: "241107140006", key: "12345", name: "Atul Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140006@centurionuniv.edu.in", tel: "+91 8707*******", pic: "image6.png" },
+        { id: "241107140007", key: "12345", name: "Rohan Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140007@centurionuniv.edu.in", tel: "+91 7320*******", pic: "image7.png" },
+        { id: "241107140008", key: "12345", name: "Ravi Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140008@centurionuniv.edu.in", tel: "+91 7520*******", pic: "image8.png" },
+        { id: "241107140010", key: "12345", name: "Sunayana Mahapatro", dept: "CSE", yr: "2nd Year", mail: "241107140010@centurionuniv.edu.in", tel: "+91 9757*******", pic: "image9.png" },
+        { id: "241107140011", key: "Sai12345", name: "Sai Chaitanya", dept: "CSE", yr: "2nd Year", mail: "241107140011@centurionuniv.edu.in", tel: "+91 7077*******", pic: "image11.png" },
+        { id: "241107140012", key: "12345", name: "Satish Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140012@centurionuniv.edu.in", tel: "+91 8728******", pic: "image12.png" },
+        { id: "241107140013", key: "12345", name: "Zaya Hussain", dept: "CSE", yr: "2nd Year", mail: "241107140013@centurionuniv.edu.in", tel: "+91 7033*******", pic: "image13.png" },
+        { id: "241107140014", key: "Mani2009", name: "Mani Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140014@centurionuniv.edu.in", tel: "+91 8144*******", pic: "image2.png" },
+        { id: "241107140015", key: "12345", name: "Dhunna Premila", dept: "CSE", yr: "2nd Year", mail: "241107140015@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image15.png" },
+        { id: "241107140016", key: "12345", name: "Sunil Bhalu", dept: "CSE", yr: "2nd Year", mail: "241107140016@centurionuniv.edu.in", tel: "+91 9777*******", pic: "image16.png" },
+        { id: "241107140017", key: "12345", name: "Sana Parveen", dept: "CSE", yr: "2nd Year", mail: "241107140017@centurionuniv.edu.in", tel: "+91 *******", pic: "image17.png" },
+        { id: "241107140018", key: "12345", name: "Kavita Kumari", dept: "CSE", yr: "2nd Year", mail: "241107140018@centurionuniv.edu.in", tel: "+91 9212*******", pic: "image.png" },
+        { id: "241107140021", key: "12345", name: "Aviraj Singh", dept: "CSE", yr: "2nd Year", mail: "241107140021@centurionuniv.edu.in", tel: "+91 6206***", pic: "image2.png" },
+        { id: "241107140023", key: "12345", name: "Subhash Kumar Yadav", dept: "CSE", yr: "2nd Year", mail: "241107140023@centurionuniv.edu.in", tel: "+91 7367***", pic: "image.png" },
+        { id: "241107140025", key: "12345", name: "Murari Kumar", dept: "CSE", yr: "2nd Year", mail: "241107140025@centurionuniv.edu.in", tel: "+91 9155***", pic: "image.png" },
+        
+        // System Error Handling for unavailable data
+        { id: "241107140009", key: "12345", name: "NOT_FOUND", mail: "241107140009@centurionuniv.edu.in" },
+        { id: "241107140019", key: "12345", name: "NOT_FOUND", mail: "241107140019@centurionuniv.edu.in" },
+        { id: "241107140020", key: "12345", name: "NOT_FOUND", mail: "241107140020@centurionuniv.edu.in" },
+        { id: "241107140022", key: "12345", name: "NOT_FOUND", mail: "241107140022@centurionuniv.edu.in" },
+        { id: "241107140026", key: "12345", name: "NOT_FOUND", mail: "241107140026@centurionuniv.edu.in" }
+    ];
 
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+    const loginForm = document.getElementById('erp-login-form');
+    const loginBtn = document.getElementById('login-btn');
+    const errMsg = document.getElementById('err-msg');
+
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Visual Feedback
+        loginBtn.innerHTML = '<span class="spinner"></span> Validating...';
+        loginBtn.disabled = true;
+        errMsg.style.display = 'none';
+
+        setTimeout(() => {
+            const reg = document.getElementById('regNo').value.trim();
+            const pass = document.getElementById('secret').value;
             
-            // Add Loading State
-            loginBtn.innerHTML = '<span class="spinner"></span> Verifying...';
-            loginBtn.disabled = true;
+            const student = directory.find(s => s.id === reg && s.key === pass);
 
-            // Simulate API Network Delay
-            setTimeout(() => {
-                const reg = document.getElementById('regNo').value;
-                const pass = document.getElementById('secret').value;
-
-                // In production, this would be a POST request to /api/auth
-                if(reg === "241107140001" && pass === "12345") {
-                    showDashboard({
-                        name: "Raghav Kumar",
-                        dept: "B.Tech Computer Science",
-                        id: reg,
-                        mail: "raghav.24@cutm.ac.in"
-                    });
-                } else {
-                    document.getElementById('login-error').style.display = 'block';
-                    loginBtn.innerHTML = 'Authenticate User';
-                    loginBtn.disabled = false;
-                }
-            }, 1200);
-        });
-
-        function showDashboard(data) {
-            document.getElementById('login-view').classList.add('hidden');
-            document.getElementById('dash-view').classList.remove('hidden');
-            
-            document.getElementById('user-welcome').innerText = data.name;
-            document.getElementById('res-id').innerText = data.id;
-            document.getElementById('res-dept').innerText = data.dept;
-            document.getElementById('res-mail').innerText = data.mail;
-        }
+            if (student && student.name !== "NOT_FOUND") {
+                // Successful Auth
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('dash-view').classList.remove('hidden');
+                
+                // Data Population
+                document.getElementById('user-name').innerText = student.name;
+                document.getElementById('user-dept').innerText = student.dept || "Department Pending";
+                document.getElementById('user-pic').src = student.pic || "https://www.w3schools.com/howto/img_avatar.png";
+                document.getElementById('d-id').innerText = student.id;
+                document.getElementById('d-year').innerText = student.yr || "N/A";
+                document.getElementById('d-mail').innerText = student.mail;
+                document.getElementById('d-tel').innerText = student.tel || "Contact Missing";
+            } else {
+                // Failure UI
+                errMsg.style.display = 'block';
+                errMsg.innerText = (student && student.name === "NOT_FOUND") 
+                    ? "System Error: Record Data Incomplete. Contact IT." 
+                    : "Access Denied: Invalid Credentials.";
+                loginBtn.innerHTML = 'Secure Login';
+                loginBtn.disabled = false;
+            }
+        }, 800);
+    });
+</script>
+    
     </script>
 </body>
 </html>
