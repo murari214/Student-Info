@@ -3,235 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Resource Planning | Centurion University</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Centurion University | Shaping Lives, Empowering Communities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #003366;
-            --accent-gold: #ff9900;
-            --success-green: #28a745;
-            --danger-red: #dc3545;
-            --surface: #ffffff;
-            --background: #f0f2f5;
-            --text-main: #1a1a1b;
-            --text-muted: #65676b;
-            --border-color: #e4e6eb;
+            --midnight: #0a0e17;
+            --surface: #121826;
+            --gold: #c5a059;
+            --gold-light: #e2c28d;
+            --text-gray: #94a3b8;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background: var(--midnight); color: var(--white); line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            background-color: var(--background);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; position: fixed; width: 100%; z-index: 1000;
+            background: rgba(10, 14, 23, 0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
         }
+        .logo { font-weight: 800; font-size: 24px; color: var(--gold); letter-spacing: 1px; text-decoration: none; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 30px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); }
+        .nav-links a:hover { color: var(--gold); }
+        .btn-portal { border: 1px solid var(--gold); padding: 10px 20px; border-radius: 4px; color: var(--gold) !important; }
 
-        .erp-container {
-            display: flex;
-            flex-direction: row; /* Desktop: Horizontal */
-            width: 100%;
-            max-width: 1000px;
-            min-height: 600px;
-            background: var(--surface);
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            overflow: hidden;
+        /* Hero Section */
+        .hero {
+            height: 90vh; display: flex; align-items: center; padding: 0 8%;
+            background: linear-gradient(rgba(10, 14, 23, 0.8), rgba(10, 14, 23, 0.8)), 
+                        url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
         }
+        .hero-content { max-width: 800px; }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px; line-height: 1.1; }
+        .hero-content span { color: var(--gold); }
+        .hero-content p { font-size: 1.2rem; color: var(--text-gray); margin-bottom: 35px; font-weight: 300; }
 
-        /* Branding Side */
-        .branding-side {
-            flex: 1;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #001a33 100%);
-            color: white;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        /* Section Styling */
+        section { padding: 100px 8%; }
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); }
+        .section-title p { color: var(--text-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 12px; margin-top: 10px; }
+
+        /* Features Grid */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: var(--surface); padding: 40px; border-radius: 12px;
+            border: 1px solid rgba(197, 160, 89, 0.1); transition: var(--transition);
         }
+        .feature-card:hover { transform: translateY(-10px); border-color: var(--gold); }
+        .feature-card h3 { color: var(--gold); margin-bottom: 15px; font-size: 1.5rem; }
+        .feature-card p { color: var(--text-gray); font-size: 0.95rem; }
 
-        .branding-side h1 { font-size: 24px; font-weight: 800; border-left: 4px solid var(--accent-gold); padding-left: 15px; line-height: 1.2; }
-        .branding-side span { color: var(--accent-gold); }
-
-        .notice-board {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 13px;
-            line-height: 1.5;
-            margin: 20px 0;
+        /* Stats Strip */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            background: #0f172a; padding: 60px 8%; text-align: center;
+            border-top: 1px solid rgba(197, 160, 89, 0.1); border-bottom: 1px solid rgba(197, 160, 89, 0.1);
         }
+        .stat-item h4 { font-size: 3rem; color: var(--gold); margin-bottom: 5px; }
+        .stat-item p { font-size: 12px; color: var(--text-gray); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Action Side */
-        .action-side {
-            flex: 1.2;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            background: white;
-        }
+        /* Mission Section */
+        .mission { display: flex; align-items: center; gap: 50px; background: #080c14; }
+        .mission-text { flex: 1; }
+        .mission-img { flex: 1; border-radius: 20px; overflow: hidden; border: 1px solid var(--gold); }
+        .mission-img img { width: 100%; height: auto; display: block; filter: grayscale(50%) contrast(120%); }
 
-        .view-header { margin-bottom: 25px; }
-        .view-header h2 { color: var(--primary-blue); font-size: 22px; }
-        .view-header p { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
+        footer { padding: 60px 8%; background: var(--midnight); border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        footer p { color: var(--text-gray); font-size: 13px; }
 
-        /* Forms */
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
-        
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 14px;
-            background: #fafafa;
-        }
-
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 6px;
-            width: 100%;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        /* Dashboard */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .data-card { padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; }
-        .data-card .label { font-size: 10px; font-weight: 700; color: var(--text-muted); }
-        .data-card .value { font-size: 13px; font-weight: 600; color: var(--primary-blue); }
-
-        .legal-footer {
-            margin-top: auto;
-            font-size: 10px;
-            color: #999;
-            text-align: center;
-            padding-top: 20px;
-        }
-
-        .hidden { display: none !important; }
-
-        /* MOBILE ADJUSTMENTS */
-        @media (max-width: 768px) {
-            body { padding: 10px; align-items: flex-start; }
-            
-            .erp-container { 
-                flex-direction: column; /* This makes it a vertical rectangle on phones */
-                height: auto;
-                min-height: unset;
-                max-width: 100%;
-            }
-
-            .branding-side {
-                padding: 30px;
-                text-align: center;
-            }
-
-            .branding-side h1 { border-left: none; border-bottom: 3px solid var(--accent-gold); padding-left: 0; padding-bottom: 10px; display: inline-block; }
-
-            .action-side { padding: 30px; }
-
-            .dashboard-grid { grid-template-columns: 1fr; }
-            .data-card[style*="grid-column: span 2;"] { grid-column: span 1 !important; }
+        @media (max-width: 968px) {
+            .mission { flex-direction: column; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="erp-container">
-        <section class="branding-side">
-            <div>
-                <h1>CENTURION<br><span>UNIVERSITY</span></h1>
-                <p style="margin-top: 10px; font-weight: 300; opacity: 0.8; font-size: 14px;">Integrated Enterprise Systems</p>
-            </div>
+    <nav>
+        <a href="index.html" class="logo">CUTM<span> UNIVERSITY</span></a>
+        <div class="nav-links">
+            <a href="#">Skill Ecosystem</a>
+            <a href="#">Campuses</a>
+            <a href="#">Placements</a>
+            <a href="login.html" class="btn-portal">ERP Portal</a>
+        </div>
+    </nav>
 
-            <div class="notice-board">
-                <strong>System Notice:</strong><br>
-                Maintenance on Sunday, 02:00 AM IST. Please submit all forms before then.
-            </div>
+    <section class="hero">
+        <div class="hero-content">
+            <p style="color: var(--gold); letter-spacing: 4px; text-transform: uppercase; font-weight: 600; margin-bottom: 10px;">India's First Skill University</p>
+            <h1>Building <span>Sustainable</span> Futures Through Innovation.</h1>
+            <p>Empowering marginalized communities through hands-on skill training and high-end technology education.</p>
+            <a href="login.html" style="padding: 18px 40px; background: var(--gold); color: var(--midnight); text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; display: inline-block;">Login to Portal</a>
+        </div>
+    </section>
 
-            <p style="font-size: 10px; opacity: 0.6;">© 2024 CUTM. Authorized Access Only.</p>
-        </section>
-
-        <section class="action-side">
-            <div id="login-view">
-                <div class="view-header">
-                    <h2>Student Authentication</h2>
-                    <p>Access your academic records and ERP services.</p>
-                </div>
-
-                <form id="erp-login-form">
-                    <div class="form-group">
-                        <label>Institutional Identity (Regd. No)</label>
-                        <input type="text" id="regNo" placeholder="e.g. 241107140001" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Security Credential</label>
-                        <input type="password" id="secret" placeholder="••••••••" required>
-                    </div>
-                    <button type="submit" class="btn-primary" id="login-btn">Authenticate User</button>
-                </form>
-                <p id="error-msg" style="color:red; font-size:12px; margin-top:10px; display:none; text-align:center;">Invalid Credentials</p>
-            </div>
-
-            <div id="dash-view" class="hidden">
-                <div class="view-header">
-                    <h2 id="user-welcome">Student Profile</h2>
-                    <p>Academic Session 2024-28</p>
-                </div>
-                <div class="dashboard-grid">
-                    <div class="data-card"><div class="label">Regd No</div><div class="value" id="d-id">-</div></div>
-                    <div class="data-card"><div class="label">Dept</div><div class="value" id="d-dept">-</div></div>
-                    <div class="data-card" style="grid-column: span 2;"><div class="label">Email</div><div class="value" id="d-mail">-</div></div>
-                </div>
-                <button onclick="location.reload()" class="btn-primary" style="background:#eee; color:#333;">Sign Out</button>
-            </div>
-
-            <footer class="legal-footer">
-                <p>IP logged for security audit: 192.168.1.1</p>
-                <p style="margin-top:5px;"><a href="#" style="color:inherit;">Privacy Policy</a> | <a href="#" style="color:inherit;">Terms</a></p>
-            </footer>
-        </section>
+    <div class="stats-bar">
+        <div class="stat-item"><h4>18k+</h4><p>Students Enrolled</p></div>
+        <div class="stat-item"><h4>#1</h4><p>Skill University (FICCI)</p></div>
+        <div class="stat-item"><h4>25+</h4><p>Centres of Excellence</p></div>
+        <div class="stat-item"><h4>6</h4><p>State-of-the-Art Campuses</p></div>
     </div>
 
-    <script>
-        // Database
-        const directory = [
-            { id: "241107140001", key: "12345", name: "Raghav Kumar", dept: "CSE", mail: "241107140001@centurionuniv.edu.in" },
-            { id: "241107140002", key: "12345", name: "Vineet Raj", dept: "CSE", mail: "241107140002@centurionuniv.edu.in" },
-            { id: "241107140011", key: "Sai12345", name: "Sai Chaitanya", dept: "CSE", mail: "241107140011@centurionuniv.edu.in" }
-        ];
+    <section>
+        <div class="section-title">
+            <p>The Centurion Advantage</p>
+            <h2>University Features</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Skill Integration</h3>
+                <p>CUTM is the only university where skills are integrated into the academic curriculum, ensuring students are industry-ready from Day 1.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Social Enterprise</h3>
+                <p>We operate 35+ on-campus manufacturing and service units that provide real-world production experience to our students.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Global Research</h3>
+                <p>Dedicated to Sustainable Development Goals (SDGs), our research focuses on smart agriculture, green energy, and rural health.</p>
+            </div>
+        </div>
+    </section>
 
-        document.getElementById('erp-login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const id = document.getElementById('regNo').value;
-            const pw = document.getElementById('secret').value;
-            const user = directory.find(u => u.id === id && u.key === pw);
+    <section class="mission">
+        <div class="mission-text">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 20px;">Our Vision</h2>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">To be a globally recognized institution that focuses on the triple bottom line: People, Planet, and Profit. We strive to create entrepreneurs who solve social challenges.</p>
+            <ul style="color: var(--gold); font-weight: 600; list-style: none;">
+                <li style="margin-bottom: 10px;">⚡ High-End Computing Labs</li>
+                <li style="margin-bottom: 10px;">⚡ Aerospace & Nano Satellite Lab</li>
+                <li style="margin-bottom: 10px;">⚡ Dassault Systèmes CoE</li>
+            </ul>
+        </div>
+        <div class="mission-img">
+            <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80" alt="Campus Life">
+        </div>
+    </section>
 
-            if(user) {
-                document.getElementById('login-view').classList.add('hidden');
-                document.getElementById('dash-view').classList.remove('hidden');
-                document.getElementById('user-welcome').innerText = user.name;
-                document.getElementById('d-id').innerText = user.id;
-                document.getElementById('d-dept').innerText = user.dept;
-                document.getElementById('d-mail').innerText = user.mail;
-            } else {
-                document.getElementById('error-msg').style.display = 'block';
-            }
-        });
-    </script>
+    <footer>
+        <p>&copy; 2026 Centurion University of Technology and Management. All Rights Reserved.</p>
+    </footer>
+
 </body>
 </html>
