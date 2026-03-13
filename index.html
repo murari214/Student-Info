@@ -31,72 +31,63 @@
 
         .erp-container {
             display: flex;
-            flex-direction: row; /* Horizontal for Laptop */
+            flex-direction: row; /* Desktop: Horizontal */
             width: 100%;
-            max-width: 1100px;
-            min-height: 650px;
+            max-width: 1000px;
+            min-height: 600px;
             background: var(--surface);
             border-radius: 12px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
-        /* Left Side: Branding & Info */
+        /* Branding Side */
         .branding-side {
             flex: 1;
             background: linear-gradient(135deg, var(--primary-blue) 0%, #001a33 100%);
             color: white;
-            padding: 50px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
-        .branding-side h1 { font-size: 28px; font-weight: 800; border-left: 4px solid var(--accent-gold); padding-left: 15px; }
+        .branding-side h1 { font-size: 24px; font-weight: 800; border-left: 4px solid var(--accent-gold); padding-left: 15px; line-height: 1.2; }
         .branding-side span { color: var(--accent-gold); }
 
         .notice-board {
             background: rgba(255,255,255,0.1);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             font-size: 13px;
-            line-height: 1.6;
+            line-height: 1.5;
             margin: 20px 0;
         }
 
-        /* Right Side: Action Area */
+        /* Action Side */
         .action-side {
             flex: 1.2;
-            padding: 60px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
-            position: relative;
             background: white;
         }
 
-        .view-header { margin-bottom: 30px; }
+        .view-header { margin-bottom: 25px; }
         .view-header h2 { color: var(--primary-blue); font-size: 22px; }
         .view-header p { color: var(--text-muted); font-size: 14px; margin-top: 5px; }
 
-        /* Form Styling */
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        /* Forms */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
         
         input {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            font-size: 15px;
-            transition: all 0.2s;
+            font-size: 14px;
             background: #fafafa;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            background: #fff;
-            box-shadow: 0 0 0 4px rgba(0,51,102,0.1);
         }
 
         .btn-primary {
@@ -108,61 +99,51 @@
             width: 100%;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            margin-top: 10px;
         }
 
-        .btn-primary:hover { background: #002244; transform: translateY(-1px); }
-
-        /* Dashboard Styles */
+        /* Dashboard */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
 
-        .data-card {
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
+        .data-card { padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; }
+        .data-card .label { font-size: 10px; font-weight: 700; color: var(--text-muted); }
+        .data-card .value { font-size: 13px; font-weight: 600; color: var(--primary-blue); }
 
-        .data-card .label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-        .data-card .value { font-size: 14px; font-weight: 600; color: var(--primary-blue); margin-top: 4px; }
-
-        /* Legal Footer */
         .legal-footer {
             margin-top: auto;
-            font-size: 11px;
+            font-size: 10px;
             color: #999;
             text-align: center;
-            border-top: 1px solid var(--border-color);
             padding-top: 20px;
         }
 
-        .legal-links a { color: var(--primary-blue); text-decoration: none; margin: 0 5px; }
-
         .hidden { display: none !important; }
 
-        .spinner {
-            width: 18px; height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- RESPONSIVE ADJUSTMENTS --- */
+        /* MOBILE ADJUSTMENTS */
         @media (max-width: 768px) {
             body { padding: 10px; align-items: flex-start; }
-            .erp-container { flex-direction: column; height: auto; }
-            .branding-side { padding: 30px; }
+            
+            .erp-container { 
+                flex-direction: column; /* This makes it a vertical rectangle on phones */
+                height: auto;
+                min-height: unset;
+                max-width: 100%;
+            }
+
+            .branding-side {
+                padding: 30px;
+                text-align: center;
+            }
+
+            .branding-side h1 { border-left: none; border-bottom: 3px solid var(--accent-gold); padding-left: 0; padding-bottom: 10px; display: inline-block; }
+
             .action-side { padding: 30px; }
+
             .dashboard-grid { grid-template-columns: 1fr; }
             .data-card[style*="grid-column: span 2;"] { grid-column: span 1 !important; }
         }
@@ -174,22 +155,22 @@
         <section class="branding-side">
             <div>
                 <h1>CENTURION<br><span>UNIVERSITY</span></h1>
-                <p style="margin-top: 10px; font-weight: 300; opacity: 0.8;">Integrated Enterprise Systems</p>
+                <p style="margin-top: 10px; font-weight: 300; opacity: 0.8; font-size: 14px;">Integrated Enterprise Systems</p>
             </div>
 
             <div class="notice-board">
                 <strong>System Notice:</strong><br>
-                Scheduled maintenance on Sunday, 02:00 AM IST. Please ensure all examination forms are submitted.
+                Maintenance on Sunday, 02:00 AM IST. Please submit all forms before then.
             </div>
 
-            <p style="font-size: 11px; opacity: 0.6;">© 2024 CUTM. All Rights Reserved.</p>
+            <p style="font-size: 10px; opacity: 0.6;">© 2024 CUTM. Authorized Access Only.</p>
         </section>
 
         <section class="action-side">
             <div id="login-view">
                 <div class="view-header">
                     <h2>Student Authentication</h2>
-                    <p>Secure access to your academic records.</p>
+                    <p>Access your academic records and ERP services.</p>
                 </div>
 
                 <form id="erp-login-form">
@@ -203,79 +184,53 @@
                     </div>
                     <button type="submit" class="btn-primary" id="login-btn">Authenticate User</button>
                 </form>
-
-                <div id="login-error" style="color: var(--danger-red); font-size: 13px; margin-top: 15px; text-align: center; display: none;">
-                    Authentication failed. Check credentials.
-                </div>
+                <p id="error-msg" style="color:red; font-size:12px; margin-top:10px; display:none; text-align:center;">Invalid Credentials</p>
             </div>
 
             <div id="dash-view" class="hidden">
                 <div class="view-header">
-                    <h2 id="user-welcome">Welcome</h2>
-                    <p>Academic Profile Session 2024-28</p>
+                    <h2 id="user-welcome">Student Profile</h2>
+                    <p>Academic Session 2024-28</p>
                 </div>
-
                 <div class="dashboard-grid">
-                    <div class="data-card"><div class="label">Regd Number</div><div class="value" id="res-id">-</div></div>
-                    <div class="data-card"><div class="label">Department</div><div class="value" id="res-dept">-</div></div>
-                    <div class="data-card" style="grid-column: span 2;"><div class="label">Email Address</div><div class="value" id="res-mail">-</div></div>
-                    <div class="data-card"><div class="label">Attendance</div><div class="value" style="color: var(--success-green);">88.4%</div></div>
-                    <div class="data-card"><div class="label">Fee Status</div><div class="value">Paid</div></div>
+                    <div class="data-card"><div class="label">Regd No</div><div class="value" id="d-id">-</div></div>
+                    <div class="data-card"><div class="label">Dept</div><div class="value" id="d-dept">-</div></div>
+                    <div class="data-card" style="grid-column: span 2;"><div class="label">Email</div><div class="value" id="d-mail">-</div></div>
                 </div>
-
-                <button onclick="location.reload()" class="btn-primary" style="background: #eee; color: #333; margin-top: 25px;">Secure Sign Out</button>
+                <button onclick="location.reload()" class="btn-primary" style="background:#eee; color:#333;">Sign Out</button>
             </div>
 
             <footer class="legal-footer">
-                <p>IP Address logged for security audit</p>
-                <div class="legal-links">
-                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a>
-                </div>
+                <p>IP logged for security audit: 192.168.1.1</p>
+                <p style="margin-top:5px;"><a href="#" style="color:inherit;">Privacy Policy</a> | <a href="#" style="color:inherit;">Terms</a></p>
             </footer>
         </section>
     </div>
 
     <script>
+        // Database
         const directory = [
             { id: "241107140001", key: "12345", name: "Raghav Kumar", dept: "CSE", mail: "241107140001@centurionuniv.edu.in" },
             { id: "241107140002", key: "12345", name: "Vineet Raj", dept: "CSE", mail: "241107140002@centurionuniv.edu.in" },
-            { id: "241107140003", key: "12345", name: "Ayan Hussain", dept: "CSE", mail: "241107140003@centurionuniv.edu.in" },
-            { id: "241107140011", key: "Sai12345", name: "Sai Chaitanya", dept: "CSE", mail: "241107140011@centurionuniv.edu.in" },
-            { id: "241107140014", key: "Mani2009", name: "Mani Kumar", dept: "CSE", mail: "241107140014@centurionuniv.edu.in" }
-            // ... add more as needed
+            { id: "241107140011", key: "Sai12345", name: "Sai Chaitanya", dept: "CSE", mail: "241107140011@centurionuniv.edu.in" }
         ];
 
-        const loginForm = document.getElementById('erp-login-form');
-        const loginBtn = document.getElementById('login-btn');
-        const errMsg = document.getElementById('login-error');
-
-        loginForm.addEventListener('submit', (e) => {
+        document.getElementById('erp-login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            loginBtn.innerHTML = '<span class="spinner"></span> Validating...';
-            loginBtn.disabled = true;
-            errMsg.style.display = 'none';
+            const id = document.getElementById('regNo').value;
+            const pw = document.getElementById('secret').value;
+            const user = directory.find(u => u.id === id && u.key === pw);
 
-            setTimeout(() => {
-                const reg = document.getElementById('regNo').value.trim();
-                const pass = document.getElementById('secret').value;
-                
-                const student = directory.find(s => s.id === reg && s.key === pass);
-
-                if (student) {
-                    document.getElementById('login-view').classList.add('hidden');
-                    document.getElementById('dash-view').classList.remove('hidden');
-                    
-                    document.getElementById('user-welcome').innerText = "User: " + student.name;
-                    document.getElementById('res-id').innerText = student.id;
-                    document.getElementById('res-dept').innerText = student.dept;
-                    document.getElementById('res-mail').innerText = student.mail;
-                } else {
-                    errMsg.style.display = 'block';
-                    loginBtn.innerHTML = 'Authenticate User';
-                    loginBtn.disabled = false;
-                }
-            }, 800);
+            if(user) {
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('dash-view').classList.remove('hidden');
+                document.getElementById('user-welcome').innerText = user.name;
+                document.getElementById('d-id').innerText = user.id;
+                document.getElementById('d-dept').innerText = user.dept;
+                document.getElementById('d-mail').innerText = user.mail;
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
         });
     </script>
 </body>
